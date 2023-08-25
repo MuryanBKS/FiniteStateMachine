@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkgtd5ocwdrxo"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_hosbq"]
+[ext_resource type="Script" path="res://finite_state_machine.gd" id="2_0clw6"]
+[ext_resource type="Script" path="res://enemy_wander_state.gd" id="3_wkhht"]
+[ext_resource type="Script" path="res://enemy_chase_state.gd" id="4_0cmri"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kq3gc"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_hosbq")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-10, 10, 10, 10, 10, -10, -10, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kq3gc")
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("2_0clw6")
+state = NodePath("EnemyChaseState")
+
+[node name="EnemyWanderState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "vision_cast")]
+script = ExtResource("3_wkhht")
+actor = NodePath("../..")
+vision_cast = NodePath("../../RayCast2D")
+
+[node name="EnemyChaseState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "vision_cast")]
+script = ExtResource("4_0cmri")
+actor = NodePath("../..")
+vision_cast = NodePath("../../RayCast2D")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(2.08165e-12, 16)

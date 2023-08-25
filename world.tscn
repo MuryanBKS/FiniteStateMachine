@@ -1,14 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dylvu6ea3s8ms"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_h2kv1"]
-[ext_resource type="PackedScene" uid="uid://dkgtd5ocwdrxo" path="res://bat.tscn" id="2_5qouh"]
+[ext_resource type="PackedScene" uid="uid://dkgtd5ocwdrxo" path="res://enemy.tscn" id="2_7aloe"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_h2kv1")
-
-[node name="Bat" parent="." instance=ExtResource("2_5qouh")]
-position = Vector2(160, 110)
 
 [node name="Wall" type="StaticBody2D" parent="."]
 
@@ -36,3 +33,6 @@ polygon = PackedVector2Array(40, 140, 50, 140, 50, 90, 50, 60, 0, 60, 0, 70, 40,
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LWall2"]
 polygon = PackedVector2Array(0, 60, 50, 60, 50, 90, 50, 140, 40, 140, 40, 70, 0, 70)
+
+[node name="Enemy" parent="." instance=ExtResource("2_7aloe")]
+position = Vector2(140, 90)
